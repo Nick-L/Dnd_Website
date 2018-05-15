@@ -1,0 +1,200 @@
+body
+{
+	background-color: #1b4a57;
+	margin: 0px;
+	font-family: Helvetica, Times New Roman;
+	font-size: 14px;
+	
+}
+
+#header
+{
+	background-color: #ae7c4a;
+	padding: 20px;
+	margin: 10px;
+	height: 90px;
+	border-radius: 10px;
+	text-align: center;
+	
+}
+
+#navBar1 ul
+{
+	padding: 5px;
+	list-style-type: none;
+	text-align: center;
+	background-color: #ae7c4a;
+	margin: 10px;
+	height: 40px;
+	border-radius: 10px;
+	font-size: 120%;
+	
+}
+
+#navBar1 ul li
+{
+	display: inline;
+}
+
+#navBar1 ul li a
+{
+	text-decoration: none;
+	padding: 10px;
+	color: #000;
+}
+
+#navBar1 ul li a:hover
+{
+	color: #1b4a57;
+	font-size: 130%;
+}
+
+.sideleft 
+{
+	background-color: #f9d7b4;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	padding: 20px;
+	font-size: 105%;
+	float: left;
+	width: 100px;
+}
+
+.main
+{
+	background-color: #f9d7b4;
+	margin-right: 10px;
+	margin-left: 160px; /*margin set as such to make room for sidebar  margin = width + 2 * padding + 2 * margin */
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	padding: 20px;
+	font-size: 110%;
+	list-style-type: none;
+	
+}
+
+h1
+{
+	font-size: 140%;
+	color: #000000;
+}
+
+
+/*Specific formating for faction list*/
+#factionList ul
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#factionList ul li
+{
+	padding-bottom: 30px;
+}
+
+.faction-learnMore a
+{
+	text-decoration: none;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #1b4a57;
+	color: #ffff00;
+}
+
+.faction-learnMore a:hover
+{
+	color: #008000;
+}
+
+.faction-image img
+{
+	width: 100px;
+	height: 100px;
+	float: left;
+	padding-right: 20px;
+}
+
+/*Specific formating for dieties page*/
+#dietiesList ul
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#dietiesList ul li
+{
+	padding-bottom: 30px;
+}
+
+.dieties-image img
+{
+	width: 100px;
+	height: 100px;
+	float: left;
+	padding-right: 20px;
+}
+
+
+/*Specific formating for Races List*/
+#RaceList ul
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#RaceList ul li
+{
+	padding-bottom: 30px;
+}
+
+.race-learnMore a
+{
+	text-decoration: none;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #1b4a57;
+	color: #ffff00;
+}
+
+.race-learnMore a:hover
+{
+	color: #008000;
+}
+
+.race-image img
+{
+	width: 150px;
+	height: 150px;
+	float: left;
+	padding-right: 20px;
+}
+
+/*Specific formating for factionsDetailed*/
+#factionDetails img
+{
+	width: 200px;
+	height: 200px;
+	float: left;
+	padding-right: 20px;
+}
+
+#factionDetails h3
+{
+	text-decoration: underline;
+	font-size: 200%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#factionDetails h2
+{
+	padding-top: 0px;
+	font-size: 140%;
+}
