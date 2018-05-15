@@ -198,3 +198,10 @@ h1
 	padding-top: 0px;
 	font-size: 140%;
 }
+
+/*Specific formatting for cartographer*/
+.cartographerImage img
+{
+	width: 700px;
+	height: 700px;
+}
