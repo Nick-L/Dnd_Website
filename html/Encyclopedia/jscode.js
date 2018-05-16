@@ -2,7 +2,10 @@
 	Function that builds the list of factions from the database.
 	Make any changes to formating of factions in this script.
 */
-function buildFactionList(){
+function buildFactionList(pageNum){
+
+	//determines number of factions per page
+	var factionsPerPage = 5;
 	
 	var ajax = new XMLHttpRequest();
 	var method = "GET";
@@ -26,7 +29,11 @@ function buildFactionList(){
 			factionList.appendChild(elementUL);
 
 			//loop through the array and build an entry for every faction
-			for(var i = 0; i < data.length; i++){
+			for(var i = 0; i < factionsPerPage; i++){
+				var x = (pageNum * factionsPerPage) + i;
+				if(x >= data.length){
+					break;
+				}
 				//build a faction entry
 				var elementLI = document.createElement("li");
 				elementUL.appendChild(elementLI);
@@ -40,7 +47,7 @@ function buildFactionList(){
 				elementDiv_1.appendChild(elementDiv_2);
 				
 				var elementImg = document.createElement("img");
-				elementImg.setAttribute("src", "images/factions/" + data[i].InsigniaImageName);
+				elementImg.setAttribute("src", "images/factions/" + data[x].InsigniaImageName);
 				elementImg.setAttribute("alt", "failed to load image");
 				elementDiv_2.appendChild(elementImg);
 				
@@ -52,7 +59,7 @@ function buildFactionList(){
 				elementH3.setAttribute("class", "faction-header-title");
 				elementDiv_3.appendChild(elementH3);
 				
-				var text_H = document.createTextNode(data[i].Name);
+				var text_H = document.createTextNode(data[x].Name);
 				elementH3.appendChild(text_H);
 				
 				var elementDiv_4 = document.createElement("div");
@@ -74,11 +81,45 @@ function buildFactionList(){
 				elementDiv_1.appendChild(elementDiv_6);
 				
 				var elementA = document.createElement("a");
-				elementA.setAttribute("href", "FactionsDetailed.htm?faction=" + data[i].Name);
+				elementA.setAttribute("href", "FactionsDetailed.htm?faction=" + data[x].Name);
 				elementDiv_6.appendChild(elementA);
 				
 				var text_L = document.createTextNode("Learn More");
 				elementA.appendChild(text_L);
+			}
+
+			var navigationAnchor = document.getElementById("factionListNavigationTable");
+
+			var eleTr = document.createElement("tr");
+			navigationAnchor.appendChild(eleTr);
+
+
+
+			if(pageNum != 0){
+				//link to previous page
+				var eleTd = document.createElement("td");
+				eleTr.appendChild(eleTd);
+
+				var eleA = document.createElement("a");
+				eleA.setAttribute("href", "Factions.htm?page=" + (pageNum - 1))
+				eleTd.appendChild(eleA);
+
+				var eleText = document.createTextNode("<< Prev");
+				eleA.appendChild(eleText); 
+
+			}
+
+			if(((pageNum) * factionsPerPage) < data.length){
+				//link to next page
+				var eleTd3 = document.createElement("td");
+				eleTr.appendChild(eleTd3);
+
+				var eleA = document.createElement("a");
+				eleA.setAttribute("href", "Factions.htm?page=" + (++pageNum))
+				eleTd3.appendChild(eleA);
+
+				var eleText = document.createTextNode("Next >>");
+				eleA.appendChild(eleText);
 			}
 		}
 	}
@@ -426,7 +467,7 @@ function buildSidebar(){
 	td2.appendChild(deitiesLink);
 
 	var factionsLink = document.createElement("a");
-	factionsLink.setAttribute("href", "Factions.htm");
+	factionsLink.setAttribute("href", "Factions.htm?page=0");
 	var factionsText = document.createTextNode("Factions");
 	factionsLink.appendChild(factionsText);
 

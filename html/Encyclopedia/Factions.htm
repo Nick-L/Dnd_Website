@@ -35,13 +35,18 @@
 			<!-- List of Factions -->
 			<div id="factionList">
 				<!-- factions will be generated here by the database -->
+			</div>
+			<div id="factionListNavigationDiv">
+				<!-- links to other pages -->
+				<table id="factionListNavigationTable">
 
+				</table>
 			</div>
 			
 		  </div>
 
 	  </body>
-	  <script>buildFactionList();</script>
+	  <script>buildFactionList(getParameterByName("page", window.location.href));</script>
 	  <script>buildNavbar();</script>
 	  <script>buildSidebar();</script>
 
