@@ -346,6 +346,163 @@ function buildFactionDetailedPage(factionName){
 	}
 }
 
+/*
+	Function that builds the the Navbar with links
+*/
+function buildNavbar(){
+
+	var navAnchor = document.getElementById("navBar1");
+	var elementUL = document.createElement("ul");
+	navAnchor.appendChild(elementUL);
+
+	var elementList1 = document.createElement("li");
+	elementUL.appendChild(elementList1);
+	var homeLink = document.createElement("a");
+	homeLink.setAttribute("href", "../Home.htm")
+	var textNode = document.createTextNode("Home");
+	homeLink.appendChild(textNode);
+	elementList1.appendChild(homeLink);
+
+	var elementList2 = document.createElement("li");
+	elementUL.appendChild(elementList2);
+	var EncyclopediaLink = document.createElement("a");
+	EncyclopediaLink.setAttribute("href", "Home.htm")
+	var textNode = document.createTextNode("Encyclopedia");
+	EncyclopediaLink.appendChild(textNode);
+	elementList1.appendChild(EncyclopediaLink);
+
+	var elementList3 = document.createElement("li");
+	elementUL.appendChild(elementList3);
+	var RecapsLink = document.createElement("a");
+	RecapsLink.setAttribute("href", "../Recaps.htm")
+	var textNode = document.createTextNode("Recaps");
+	RecapsLink.appendChild(textNode);
+	elementList3.appendChild(RecapsLink);
+}
+
+function buildSidebar(){
+	var sideAnchor = document.getElementsByClassName("sideleft");
+	var elementTable = document.createElement("table");
+	sideAnchor[0].appendChild(elementTable);
+
+	//build table
+	var eleTr1 = document.createElement("tr");
+	elementTable.appendChild(eleTr1);
+
+	var eleTr2 = document.createElement("tr");
+	elementTable.appendChild(eleTr2);
+
+	var eleTr3 = document.createElement("tr");
+	elementTable.appendChild(eleTr3);
+
+	var eleTr4 = document.createElement("tr");
+	elementTable.appendChild(eleTr4);
+
+	var td1 = document.createElement("td");
+	eleTr1.appendChild(td1);
+
+	var td2 = document.createElement("td");
+	eleTr2.appendChild(td2);
+
+	var td3 = document.createElement("td");
+	eleTr3.appendChild(td3);
+
+	var td4 = document.createElement("td");
+	eleTr4.appendChild(td4);
+
+	//build links to be put in table on sidebar
+	var racesLink = document.createElement("a");
+	racesLink.setAttribute("href", "Races.htm");
+	var racesText = document.createTextNode("Races");
+	racesLink.appendChild(racesText);
+
+	td1.appendChild(racesLink);
+
+	var deitiesLink = document.createElement("a");
+	deitiesLink.setAttribute("href", "Deities.htm");
+	var deitiesText = document.createTextNode("Deities");
+	deitiesLink.appendChild(deitiesText);
+
+	td2.appendChild(deitiesLink);
+
+	var factionsLink = document.createElement("a");
+	factionsLink.setAttribute("href", "Factions.htm");
+	var factionsText = document.createTextNode("Factions");
+	factionsLink.appendChild(factionsText);
+
+	td3.appendChild(factionsLink);
+
+	var cartographerLink = document.createElement("a");
+	cartographerLink.setAttribute("href", "Cartographer.htm?map=World");
+	var cartographerText = document.createTextNode("Cartographer");
+	cartographerLink.appendChild(cartographerText);
+
+	td4.appendChild(cartographerLink);
+
+
+}
+
+function buildCartographer(mapName){
+	var ajax = new XMLHttpRequest();
+	var method = "GET";
+	var url = "getMapInfo.php";
+	var asynchronous = true;
+
+	ajax.open(method, url, asynchronous);
+	//send request
+	ajax.send();
+
+	//recieve response from php file
+	ajax.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			//convert JSON to array
+			var data = JSON.parse(this.responseText);
+			console.log(data); //only used for debugging
+
+			//get anchors
+			var imageAnchor = document.getElementById("cartographerImage");
+			var linksAnchor = document.getElementById("mapsLink");
+
+			//build img element
+			elementImg = document.createElement("img");
+			elementImg.setAttribute("src", "images/maps/" + mapName);
+			elementImg.setAttribute("alt", "failed to load image");
+			imageAnchor.appendChild(elementImg);
+
+			var c = 0;
+
+			for(var i = 0; i < data.length; i++){
+				if(data[i].Parent == mapName){
+					if(c == 0){
+						var eleTr = document.createElement("tr");
+						linksAnchor.appendChild(eleTr);
+						c++;
+					}
+					else if (c > 4){
+						c = 0;
+					}
+					else{
+						c++;
+					}
+
+					var eleTd = document.createElement("td");
+					eleTr.appendChild(eleTd);
+
+					var eleA = document.createElement("a");
+					eleA.setAttribute("href", "" + data[i].LinkText);
+					eleTd.appendChild(eleA);
+
+					var eleText = document.createTextNode(data[i].Name);
+					eleA.appendChild(eleText);
+
+				}
+			}
+		}
+	}
+
+
+
+}
 
 /*
 	Helper function for extracting data from urls
