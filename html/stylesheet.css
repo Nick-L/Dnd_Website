@@ -200,11 +200,30 @@ h1
 }
 
 /*Specific formatting for cartographer*/
-#cartographerImage img
+#cartographerImageAnchor img
 {
 	display: block;
 	max-width: 700px;
 	max-height: 700px;
 	width: auto;
 	height: auto;
+}
+
+#mapsLink td
+{
+	padding: 10px;
+}
+
+#mapsLink a 
+{
+	text-decoration: none;
+	padding: 5px;
+	border-radius: 10px;
+	background-color: #1b4a57;
+	color: #f9d7b4;
+}
+
+#mapsLink a:hover
+{
+	color: #000000;
 }

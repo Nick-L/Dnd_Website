@@ -3,7 +3,7 @@
 <html>
 
 	  <head>
-	  <title>Test Encyclopedia</title>
+	  <title>Aktosha Encyclopedia</title>
 	  <link type="text/css" rel="stylesheet" href="../stylesheet.css">
 	  </head>
 
@@ -11,7 +11,7 @@
 	  <body>
 	  
 	  <div id="header">
-		<h1>Welcome to the Encyclopedia of Aktosha</h1>	  
+		<h1>The Encyclopedia of Aktosha</h1>	  
 	  </div>
 
 	  <!-- Navigation bar links -->
@@ -27,11 +27,23 @@
 	  
 	  <!-- Main Content Panel -->
 	  <div class="main">
-	  	<h1>Aktosha</h1>
-	  	<div id="cartographerImage">
+	  	<h1 id="mapHeading"></h1>
+
+	  	<div id="cartographerImageAnchor">
 
 	  	</div>
-	  	<h2>Continents</h2>
+	  	<table id="CartographerButtons">
+	  		<tr>
+	  			<td>
+	  				<Button type="button" onclick="replaceCartographerImage(getParameterByName('map', window.location.href), 1, 0)">Show Borders</Button>
+	  				<Button type="button" onclick="replaceCartographerImage(getParameterByName('map', window.location.href), 0, 1)">Show Cities</Button>
+	  				<Button type="button" onclick="replaceCartographerImage(getParameterByName('map', window.location.href), 1, 1)">Show Both</Button>
+	  				<Button type="button" onclick="replaceCartographerImage(getParameterByName('map', window.location.href), 0, 0)">Clear Overlays</Button>
+	  			</td>
+	  		</tr>
+	  	
+	  	</table>
+	  	<h2>Zoom To Location</h2>
 	  	<table id="mapsLink">
 	  		<!-- Build links with this page as a parent -->
 	  	</table>

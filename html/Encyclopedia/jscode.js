@@ -474,7 +474,7 @@ function buildSidebar(){
 	td3.appendChild(factionsLink);
 
 	var cartographerLink = document.createElement("a");
-	cartographerLink.setAttribute("href", "Cartographer.htm?map=World");
+	cartographerLink.setAttribute("href", "Cartographer.htm?map=Aktosha");
 	var cartographerText = document.createTextNode("Cartographer");
 	cartographerLink.appendChild(cartographerText);
 
@@ -501,12 +501,30 @@ function buildCartographer(mapName){
 			console.log(data); //only used for debugging
 
 			//get anchors
-			var imageAnchor = document.getElementById("cartographerImage");
+			var imageAnchor = document.getElementById("cartographerImageAnchor");
 			var linksAnchor = document.getElementById("mapsLink");
+			var headingAnchor = document.getElementById("mapHeading");
+
+			//build heading
+			var txt = document.createTextNode(mapName);
+			headingAnchor.appendChild(txt);
 
 			//build img element
 			elementImg = document.createElement("img");
-			elementImg.setAttribute("src", "images/maps/" + mapName);
+			elementImg.setAttribute("id", "cartographerImage");
+			console.log(data[i]);
+			if(data[i] == null){
+				elementImg.setAttribute("src", "images/maps/NoOverlay/" + mapName + ".png");
+			}
+			else if(data[i].Parent === "Aktosha"){
+				elementImg.setAttribute("src", "images/maps/Borders/" + mapName + "_Borders.png");
+			}
+			else if(data[i].Parent === "Loftus" || data[i].Parent === "Aleron" || data[i].Parent === "Feyon" || data[i].Parent === "Vasari"){
+				elementImg.setAttribute("src", "images/maps/Borders&Cities/" + mapName + "_Borders&Cities.png");
+			}
+			else{
+				elementImg.setAttribute("src", "images/maps/NoOverlay/" + mapName + ".png");
+			}
 			elementImg.setAttribute("alt", "failed to load image");
 			imageAnchor.appendChild(elementImg);
 
@@ -530,7 +548,15 @@ function buildCartographer(mapName){
 					eleTr.appendChild(eleTd);
 
 					var eleA = document.createElement("a");
-					eleA.setAttribute("href", "" + data[i].LinkText);
+					if(data[i].Category == "cartographer"){
+						eleA.setAttribute("href", "Cartographer.htm?map=" + data[i].Name);
+					}
+					else if(data[i].Category == "city"){
+						eleA.setAttribute("href", "CityDetails.htm?name=" + data[i].Name);
+					}
+					else{
+						console.log("ERROR: Checking Category wasn't correct it was " + data[i].Category);
+					}
 					eleTd.appendChild(eleA);
 
 					var eleText = document.createTextNode(data[i].Name);
@@ -543,6 +569,22 @@ function buildCartographer(mapName){
 
 
 
+}
+
+function replaceCartographerImage(Name, Borders, Cities){
+	var elementImg = document.getElementById("cartographerImage");
+	if(Borders == 1 && Cities == 0){
+		elementImg.setAttribute("src", "images/maps/Borders/" + Name + "_Borders.png");
+	}
+	else if(Borders == 0 && Cities == 1){
+		elementImg.setAttribute("src", "images/maps/Cities/" + Name + "_Cities.png");
+	}
+	else if(Borders == 1 && Cities == 1){
+		elementImg.setAttribute("src", "images/maps/Borders&Cities/" + Name + "_Borders&Cities.png");
+	}
+	else{
+		elementImg.setAttribute("src", "images/maps/NoOverlay/" + Name + ".png");
+	}
 }
 
 /*
